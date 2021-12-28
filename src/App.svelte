@@ -4,19 +4,60 @@
 	
 	export let title;
 
-	const words = [
-		'a', 
-		{
-			word: 'wet', 
-			xDelay: 1000
-		},
-		['mar', 'ket'],
-		'smile', 
-		'on', 
-		'your', 
-		['for', 'get', 'ta', 'ble'], 
-		'face'
-	];
+	let firstVerse = hereIAm[0];
+	let lines = [];
+	firstVerse.couplets.forEach(couplet => {
+		lines.push(couplet.a);
+		lines.push(couplet.b);
+	});
+	
+	const syllableSeparatorReg = /\//,
+		commaReg = /,/,
+		semicolonReg = /;/,
+		dashReg = /[–-]/;
+	let parsedLines = [];
+
+	lines.forEach(line => {
+		let splitLine = line.split(' ');
+		let parsedLine = [];
+			splitLine.forEach((word, i) => {
+				let parsedWord = word;
+				if (syllableSeparatorReg.test(word)) parsedWord = word.split('/');
+				if (commaReg.test(word)) {
+					parsedWord = {
+						word: word.slice(0, word.length - 1),
+						xDelay: 1500,
+						note: 'comma'
+					}
+				}
+				if (splitLine.length === i + 1) { 
+					parsedWord = {
+						word: word,
+						xDelay: 2500,
+						note: 'end of line'
+					}
+				} 
+				parsedLine.push(parsedWord);
+			});
+		parsedLines.push(parsedLine); 
+	});
+
+	console.log(parsedLines);
+
+	const words = parsedLines.flat();
+	// [
+	// 	'a', 
+	// 	{
+	// 		word: 'wet', 
+	// 		xDelay: 1000
+	// 	},
+	// 	['mar', 'ket'],
+	// 	'smile', 
+	// 	'on', 
+	// 	'your', 
+	// 	['for', 'get', 'ta', 'ble'], 
+	// 	'face'
+	// ];
 	const wordCount = words.length;
 	let wordIndex = 0;
 
