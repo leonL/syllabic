@@ -25,14 +25,13 @@
 				if (syllableSeparatorReg.test(word)) parsedWord = word.split('/');
 				if (commaReg.test(word)) {
 					parsedWord = {
-						word: word.slice(0, word.length - 1),
+						word: parsedWord.slice(0, parsedWord.length - 1),
 						xDelay: 1500,
 						note: 'comma'
 					}
-				}
-				if (splitLine.length === i + 1) { 
+				} else if (splitLine.length === i + 1) { 
 					parsedWord = {
-						word: word,
+						word: parsedWord,
 						xDelay: 2500,
 						note: 'end of line'
 					}
