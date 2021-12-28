@@ -4,18 +4,18 @@ const hereIAm = [
     couplets: [
       {
         piSlice: 3,
-        a: "a wet, mar/ket smile on your for/get/ta/ble face",
-        b: "de/liv/er/ing that neigh/bour/ly some/thing to our hood" 
+        a: "a wet, market smile on your forgettable face",
+        b: "delivering that neighbourly something to our hood" 
       },
       {
         piSlice: 2,
-        a: "some chink in ath/lei/sure jogg/ing the junc/tion",
-        b: "of o/ver/hear/ing, the feath/er/weight hea/vy breath/ing" 
+        a: "some chink in athleisure jogging the junction",
+        b: "of overhearing, the featherweight heavy breathing" 
       },
       {
         piSlice: 1,
-        a: "the other white peo/ple, a new Is/rael/ite vec/tor",
-        b: "start/ing from the hor/ri/ble reach of her des/per/ate touch" 
+        a: "the other white people, a new Israelite vector",
+        b: "starting from the horrible reach of her desperate touch" 
       }
     ]
   },

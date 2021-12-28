@@ -10,11 +10,12 @@
 		lines.push(couplet.a);
 		lines.push(couplet.b);
 	});
+
+	const getRandomInt = function(max, min = 0) {
+  	return Math.floor(Math.random() * (max - min + 1) + min);
+	};
 	
-	const syllableSeparatorReg = /\//,
-		commaReg = /,/,
-		semicolonReg = /;/,
-		dashReg = /[–-]/;
+	const commaReg = /,/, dashReg = /[–-]/;
 	let parsedLines = [];
 
 	lines.forEach(line => {
@@ -22,17 +23,16 @@
 		let parsedLine = [];
 			splitLine.forEach((word, i) => {
 				let parsedWord = word;
-				if (syllableSeparatorReg.test(word)) parsedWord = word.split('/');
 				if (commaReg.test(word)) {
 					parsedWord = {
 						word: parsedWord.slice(0, parsedWord.length - 1),
-						xDelay: 1500,
+						xDelay: 1000,
 						note: 'comma'
 					}
 				} else if (splitLine.length === i + 1) { 
 					parsedWord = {
 						word: parsedWord,
-						xDelay: 2500,
+						xDelay: 2000,
 						note: 'end of line'
 					}
 				} 
@@ -44,55 +44,30 @@
 	console.log(parsedLines);
 
 	const words = parsedLines.flat();
-	// [
-	// 	'a', 
-	// 	{
-	// 		word: 'wet', 
-	// 		xDelay: 1000
-	// 	},
-	// 	['mar', 'ket'],
-	// 	'smile', 
-	// 	'on', 
-	// 	'your', 
-	// 	['for', 'get', 'ta', 'ble'], 
-	// 	'face'
-	// ];
 	const wordCount = words.length;
 	let wordIndex = 0;
 
 	let word = '';
-	let syllableIndex = 1;
 
 	function magnifyWords() {
-		let nextExpression = words[wordIndex],
-			delayBeforeNextWord = 1000;
+		let nextExpression = words[wordIndex], letterCount = nextExpression.length,
+			delayBeforeNextWord = getRandomInt(10, 5) * 100;
+
+		if (letterCount > 5) delayBeforeNextWord += (Math.floor(letterCount / 5) * 300);
 
 		if (typeof nextExpression === 'object' && !Array.isArray(nextExpression)) {
 			delayBeforeNextWord += nextExpression.xDelay;
 			nextExpression = nextExpression.word;
 		}
 
-		if (Array.isArray(nextExpression)) {
-			let syllableCount = nextExpression.length;
-			word = nextExpression.slice(0, syllableIndex).join('');
-			if (syllableIndex < syllableCount) { 
-				syllableIndex++;
-				delayBeforeNextWord = 500;
-			} else {
-				syllableIndex = 1;
-				wordIndex++;
-				delayBeforeNextWord = 1000;
-			}
-		} else {
-			word = nextExpression;
-			if (wordIndex + 1 < wordCount) wordIndex++;
-		} 
+		word = nextExpression;
+		if (wordIndex + 1 < wordCount) wordIndex++;
 
 		setTimeout(() => magnifyWords(), delayBeforeNextWord);
 	}
 
 	onMount(() => {
-		magnifyWords();
+		setTimeout(() => magnifyWords(), 5000);
 	})
 </script>
 
