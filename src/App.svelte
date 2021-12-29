@@ -18,7 +18,7 @@
 </svelte:head>
 
 <main>
-	<Carousel bind:this={carousel} >
+	<Carousel bind:this={carousel} dots={false} arrows={false}>
 		{#each firstCoupletWords as word}
 			<div class='magnifier'>{ word }</div>
 		{/each}
