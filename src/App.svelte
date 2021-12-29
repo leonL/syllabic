@@ -8,7 +8,7 @@
 
 	let firstVerse = hereIAm[0];
 	let firstCouplet = firstVerse.couplets[0];
-	let firstCoupletWords = [...firstCouplet.a.split(' '), ...firstCouplet.b.split(' ')];
+	let firstCoupletWords = [...firstCouplet.a.split(' ')];
 
 	console.log(firstCoupletWords);
 </script>
@@ -18,7 +18,7 @@
 </svelte:head>
 
 <main>
-	<Carousel bind:this={carousel} swiping={false} autoplay={true} pauseOnFocus={true}>
+	<Carousel bind:this={carousel} swiping={false} dots={false}>
 		{#each firstCoupletWords as word}
 			<div class='magnifier'>{ word }</div>
 		{/each}
