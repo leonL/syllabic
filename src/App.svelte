@@ -53,14 +53,6 @@
 		text-align: center;
 	}
 
-	.word {
-		font-size: 18px;
-	}
-
-	.active {
-		font-weight: 800;
-	}
-
 	.navigation {
 		position: absolute;
 		top: 0;
