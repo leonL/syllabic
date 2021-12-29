@@ -4,7 +4,7 @@
 	import Carousel from 'svelte-carousel';
 	
 	export let title;
-	let carousel;
+	let carousel, carouselIndex;
 
 	function goToPrevPage() {
 		carousel.goToPrev({ animated: false });
@@ -26,10 +26,15 @@
 </svelte:head>
 
 <main>
-	<Carousel bind:this={carousel} arrows={false} swiping={false} duration={1000}>
+	<Carousel bind:this={carousel} arrows={false} swiping={false} duration={1000} let:currentPageIndex>
 		{#each firstCoupletWords as word}
-		<div class='magnifier'>{ word }</div>
+			<div class='magnifier'>{ word }</div>
 		{/each}
+		<div slot="dots">
+			{#each firstCoupletWords as word, i}
+				<span class="word {currentPageIndex === i ? 'active' : ''}">{ word } </span>
+			{/each}
+		</div>
 	</Carousel>
 	<div class="navigation">
 		<div class="step" on:click={goToPrevPage}></div>
@@ -51,6 +56,14 @@
 		width: 100%;
 		font-size: 60px;
 		text-align: center;
+	}
+
+	.word {
+		font-size: 18px;
+	}
+
+	.active {
+		font-weight: 800;
 	}
 
 	.navigation {
