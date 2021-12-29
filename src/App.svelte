@@ -7,11 +7,11 @@
 	let carousel;
 
 	function goToPrevPage() {
-		carousel.goToPrev();
+		carousel.goToPrev({ animated: false });
 	}
 
 	function goToNextPage() {
-		carousel.goToNext();
+		carousel.goToNext({ animated: false });
 	}
 
 	let firstVerse = hereIAm[0];
