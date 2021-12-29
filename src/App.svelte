@@ -30,11 +30,6 @@
 		{#each firstCoupletWords as word}
 			<div class='magnifier'>{ word }</div>
 		{/each}
-		<div slot="dots">
-			{#each firstCoupletWords as word, i}
-				<span class="word {currentPageIndex === i ? 'active' : ''}">{ word } </span>
-			{/each}
-		</div>
 	</Carousel>
 	<div class="navigation">
 		<div class="step" on:click={goToPrevPage}></div>
